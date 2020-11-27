@@ -64,17 +64,24 @@ toolkit:
 
 
 inputs:
-  - example_step_input: Default Value - you can leave this empty if you want to
+  - working_dir: $BITRISE_SOURCE_DIR
     opts:
-      title: "Example Step Input"
-      summary: Summary. No more than 2-3 sentences.
-      description: |
-        Description of this input.
-
-        Can be Markdown formatted text.
+      title: "Root directory of project"
+      summary: The root directory of your project, where your `pubspec.yaml` file is located.
       is_expand: true
       is_required: true
-      value_options: []
+  - aws_access_key_id: $AWS_ACCESS_KEY_ID
+    opts:
+      title: "AWS_ACCESS_KEY_ID"
+      summary: ccccc.
+      is_expand: true
+      is_required: true
+  - aws_secret_access_key: $AWS_SECRET_ACCESS_KEY
+    opts:
+      title: "AWS_SECRET_ACCESS_KEY"
+      summary: ccccc 222.
+      is_expand: true
+      is_required: true
 
 outputs:
   - EXAMPLE_STEP_OUTPUT:
