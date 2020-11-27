@@ -82,6 +82,12 @@ inputs:
       summary: ccccc 222.
       is_expand: true
       is_required: true
+  - aws_build_internal_id: $BA_BUILD_INTERNAL_ID
+    opts:
+      title: "aws_build_internal_id"
+      summary: id in format intuitive_web_solutions/2020-11-04_18-16-13_ee806e7a-cd50-4b8f-90fa-619440b775e8
+      is_expand: true
+      is_required: true
 
 outputs:
   - EXAMPLE_STEP_OUTPUT:

@@ -18,7 +18,15 @@ func exitErrorf(msg string, args ...interface{}) {
 func main() {
 	aws_access_key_id := os.Getenv("aws_access_key_id")
 	aws_secret_access_key := os.Getenv("aws_secret_access_key")
+	aws_build__internal_id := os.Getenv("aws_build_internal_id")
+	working_dir := os.Getenv("working_dir")
+	workspace_dir := working_dir
 
+	aws_build_bucket := "briteapps-builds-output"
+	//aws_build__internal_id := "intuitive_web_solutions/2020-11-04_18-16-13_ee806e7a-cd50-4b8f-90fa-619440b775e8"
+	dist_loc := aws_build__internal_id + "/out/dist/"
+	println(aws_build_bucket)
+	println(dist_loc)
 	fmt.Println("This is the value specified for the input 'aws_access_key_id':", aws_access_key_id)
 	fmt.Println("This is the value specified for the input 'aws_access_key_id':", aws_secret_access_key)
 
@@ -27,6 +35,7 @@ func main() {
 	// You can export Environment Variables for other Steps with
 	//  envman, which is automatically installed by `bitrise setup`.
 	// A very simple example:
+
 	cmdLog, err := exec.Command("bitrise", "envman", "add", "--key", "EXAMPLE_STEP_OUTPUT", "--value", "the value you want to share").CombinedOutput()
 	if err != nil {
 		fmt.Printf("Failed to expose output with envman, error: %#v | output: %s", err, cmdLog)
@@ -38,6 +47,28 @@ func main() {
 	)
 
 	// Create S3 service client
+	//list_buckets(sess, err)
+
+	//download_from := aws_build__internal_id + "/out/cordova"
+	cordova_workspace := workspace_dir + "/cordova"
+
+	Download_directory_into(aws_build__internal_id + "/in", cordova_workspace, sess)
+
+	Download_directory_into(aws_build__internal_id + "/out/cordova", cordova_workspace, sess)
+
+	Download_directory_into(aws_build__internal_id+"/out/dist", cordova_workspace+"/www", sess)
+	// You can find more usage examples on envman's GitHub page
+	//  at: https://github.com/bitrise-io/envman
+
+	//
+	// --- Exit codes:
+	// The exit code of your Step is very important. If you return
+	//  with a 0 exit code `bitrise` will register your Step as "successful".
+	// Any non zero exit code will be registered as "failed" by `bitrise`.
+	os.Exit(0)
+}
+
+func list_buckets(sess *session.Session, err error) {
 	svc := s3.New(sess)
 	result, err := svc.ListBuckets(nil)
 	if err != nil {
@@ -50,13 +81,4 @@ func main() {
 		fmt.Printf("* %s created on %s\n",
 			aws.StringValue(b.Name), aws.TimeValue(b.CreationDate))
 	}
-	// You can find more usage examples on envman's GitHub page
-	//  at: https://github.com/bitrise-io/envman
-
-	//
-	// --- Exit codes:
-	// The exit code of your Step is very important. If you return
-	//  with a 0 exit code `bitrise` will register your Step as "successful".
-	// Any non zero exit code will be registered as "failed" by `bitrise`.
-	os.Exit(0)
 }
