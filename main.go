@@ -22,6 +22,7 @@ func main() {
 	aws_access_key_id := os.Getenv("aws_access_key_id")
 	aws_secret_access_key := os.Getenv("aws_secret_access_key")
 	aws_build__internal_id := os.Getenv("aws_build_internal_id")
+	ba_ios_icon_hex_color := os.Getenv("ba_ios_icon_hex_color")
 	working_dir := os.Getenv("working_dir")
 	workspace_dir := working_dir
 
@@ -60,6 +61,15 @@ func main() {
 	Download_directory_into(aws_build__internal_id + "/out/cordova", cordova_workspace, sess)
 
 	Download_directory_into(aws_build__internal_id+"/out/dist", cordova_workspace+"/www", sess)
+
+	icon_file := cordova_workspace + "/icon.png"
+	splash_file := cordova_workspace + "/splash.png"
+
+	ConvertPossibleJpegToPNG(splash_file)
+
+	// "#5094D0"
+	OverlayImageWithColor(icon_file, ba_ios_icon_hex_color)
+
 	// You can find more usage examples on envman's GitHub page
 	//  at: https://github.com/bitrise-io/envman
 

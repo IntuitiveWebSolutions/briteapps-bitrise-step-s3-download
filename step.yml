@@ -88,6 +88,12 @@ inputs:
       summary: id in format intuitive_web_solutions/2020-11-04_18-16-13_ee806e7a-cd50-4b8f-90fa-619440b775e8
       is_expand: true
       is_required: true
+  - ba_ios_icon_hex_color: $BA_IOS_ICON_HEX_COLOR
+    opts:
+      title: "ba_ios_icon_hex_color"
+      summary: Background color of iOS icon after transformation, for example - `#5094D0`
+      is_expand: true
+      is_required: true
 
 outputs:
   - EXAMPLE_STEP_OUTPUT:
