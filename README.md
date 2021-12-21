@@ -1,3 +1,7 @@
+# This is PUBLIC repository!
+Repo is public in order to be able to run at bitrise.io. No secrets/sensitive data should be stored here!
+
+
 # s3 folder download
 
 Test description
