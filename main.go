@@ -56,18 +56,23 @@ func main() {
 	//download_from := aws_build__internal_id + "/out/cordova"
 	cordova_workspace := workspace_dir + "/cordova"
 
+    fmt.Println("Start download IN folder")
 	Download_directory_into(aws_build__internal_id + "/in", cordova_workspace, sess)
 
+	fmt.Println("Start download OUT-CORDOVA folder")
 	Download_directory_into(aws_build__internal_id + "/out/cordova", cordova_workspace, sess)
 
+    fmt.Println("Start download OUT-DIST folder")
 	Download_directory_into(aws_build__internal_id+"/out/dist", cordova_workspace+"/www", sess)
 
 	icon_file := cordova_workspace + "/icon.png"
 	splash_file := cordova_workspace + "/splash.png"
 
+    fmt.Println("Start ConvertPossibleJpegToPNG splash_file")
 	ConvertPossibleJpegToPNG(splash_file)
 
 	// "#5094D0"
+	fmt.Println("Start OverlayImageWithColor icon_file", ba_ios_icon_hex_color)
 	OverlayImageWithColor(icon_file, ba_ios_icon_hex_color)
 
 	// You can find more usage examples on envman's GitHub page
