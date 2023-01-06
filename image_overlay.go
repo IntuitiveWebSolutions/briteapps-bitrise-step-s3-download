@@ -46,6 +46,14 @@ func OverlayImageWithColor(input_filepath string, hex_color string) {
 func ConvertPossibleJpegToPNG(input_filepath string) {
 	// Replaces file in-place
 	fmt.Println("ConvertPossibleJpegToPNG 'input_filepath':", input_filepath)
+	fmt.Println("ConvertPossibleJpegToPNG 'checking file size...':")
+	fi, err := os.Stat(input_filepath)
+	if err != nil {
+    		log.Fatal(err)
+	}
+	// get the size
+	size := fi.Size()
+	fmt.Println("ConvertPossibleJpegToPNG : file size ", size)
 	fmt.Println("ConvertPossibleJpegToPNG : opening file...")
 	reader, err := os.Open(input_filepath)
 	if err != nil {
