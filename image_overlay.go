@@ -45,11 +45,14 @@ func OverlayImageWithColor(input_filepath string, hex_color string) {
 
 func ConvertPossibleJpegToPNG(input_filepath string) {
 	// Replaces file in-place
+	fmt.Println("ConvertPossibleJpegToPNG 'input_filepath':", input_filepath)
+	fmt.Println("ConvertPossibleJpegToPNG : opening file...")
 	reader, err := os.Open(input_filepath)
 	if err != nil {
 		log.Fatal(err)
 	}
 
+	fmt.Println("ConvertPossibleJpegToPNG : decoding file...")
 	original, _, err := image.Decode(reader)
 	if err != nil {
 		log.Fatal(err)
@@ -62,6 +65,7 @@ func ConvertPossibleJpegToPNG(input_filepath string) {
 	//"#5094D0"
 	draw.Draw(destination, original_bounds, original, original_bounds.Min, draw.Src)
 
+	fmt.Println("ConvertPossibleJpegToPNG : creating new file...")
 	f, err := os.Create(input_filepath)
 	err = png.Encode(f, destination)
 	if err != nil {

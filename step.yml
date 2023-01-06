@@ -13,9 +13,9 @@ summary: |
   Downloads folder from given s3 bucket + folder into destination directory
 description: |
   Test description
-website: https://github.com/gleb-sevruk/bitrise-step-s3-folder-download
-source_code_url: https://github.com/gleb-sevruk/bitrise-step-s3-folder-download
-support_url: https://github.com/gleb-sevruk/bitrise-step-s3-folder-download/issues
+website: https://github.com/IntuitiveWebSolutions/briteapps-bitrise-step-s3-download
+source_code_url: https://github.com/IntuitiveWebSolutions/briteapps-bitrise-step-s3-download
+support_url: https://github.com/IntuitiveWebSolutions/briteapps-bitrise-step-s3-download/issues
 host_os_tags:
   - osx-10.10
   - ubuntu-16.04
@@ -60,7 +60,7 @@ deps:
 
 toolkit:
   go:
-    package_name: github.com/gleb-sevruk/bitrise-step-s3-folder-download
+    package_name: IntuitiveWebSolutions/briteapps-bitrise-step-s3-download
 
 
 inputs:
