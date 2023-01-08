@@ -144,8 +144,7 @@ func Download_directory_into(download_from string,	download_to string, sess *ses
 		if err != nil {
 		    exitErrorf("Unable to download item %q, %v", item.Key, err)
 		}
-		println("Bytes copied: " + numBytes)
-
+		fmt.Printf("Bytes copied:", numBytes)
 	}
 }
 func ensureDir(fileName string) {
