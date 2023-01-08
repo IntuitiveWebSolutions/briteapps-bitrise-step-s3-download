@@ -128,20 +128,23 @@ func Download_directory_into(download_from string,	download_to string, sess *ses
 		//fmt.Println("Size:         ", *item.Size)
 		//fmt.Println("Storage class:", *item.StorageClass)
 		//fmt.Println("")
-		println("downloading to: " + *item.Key)
+		println("------------")
+		println("copying from: " + *item.Key)
 		new_str := strings.Replace(*item.Key, download_from, "", -1)
 		new_path := download_to + new_str
-		println("downloading to: " +new_path)
+		println("...to: " +new_path)
 		ensureDir(new_path)
 		file, _ := os.Create(new_path)
 		downloader := s3manager.NewDownloader(sess)
-		numBytes, _ := downloader.Download(file,
+		numBytes, err := downloader.Download(file,
 			&s3.GetObjectInput{
 				Bucket: aws.String(get_aws_build_bucket()),
 				Key:    item.Key,
 			})
-
-		println(numBytes)
+		if err != nil {
+		    exitErrorf("Unable to download item %q, %v", item.Key, err)
+		}
+		println("Bytes copied: " + numBytes)
 
 	}
 }
